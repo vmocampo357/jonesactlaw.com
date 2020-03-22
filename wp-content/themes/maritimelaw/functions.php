@@ -179,6 +179,8 @@ class StarterSite extends TimberSite {
 			'before_title'  => '<span class="hidden">',
 			'after_title'   => '</span>',
 		) );
+
+		add_post_type_support( 'post', 'simple-page-sidebars' );
 	}
 
 	/**
