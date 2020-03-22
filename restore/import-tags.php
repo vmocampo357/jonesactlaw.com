@@ -1,0 +1,901 @@
+<?php
+/**
+ * Load WordPress into the mix (for pushing Posts)
+ * =====================================================================================================================
+ */
+// require_once('/var/www/dev.jonesactlaw.com/public_html/maritime/wp-load.php');
+// require_once('../wp-load.php');
+
+
+
+/**
+ * Create an instance of PDO that we'll use to query for the Posts
+ * TODO: Change this to PROD, READ-ONLY INFO once ready
+ * =====================================================================================================================
+ */
+$db   = 'jonesactlaw_wp';
+// $db   = 'maritimelaw_wp';
+$host = '127.0.0.1';
+$user = 'jonesact';
+$pass = 'Joneslaw2017!';
+$charset = 'utf8mb4';
+
+$dsn = "mysql:host=$host;dbname=$db;charset=$charset";
+$opt = [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES   => false,
+];
+$pdo = new PDO($dsn, $user, $pass, $opt);
+
+
+$json_string = "[{
+	\"term_id\": 1,
+	\"name\": \"Uncategorized\",
+	\"slug\": \"uncategorized\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 1,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 163
+}, {
+	\"term_id\": 53,
+	\"name\": \"Training\",
+	\"slug\": \"training\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 53,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 59,
+	\"name\": \"Safety\",
+	\"slug\": \"safety\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 59,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 7
+}, {
+	\"term_id\": 61,
+	\"name\": \"Regulations\",
+	\"slug\": \"regulations\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 61,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 4
+}, {
+	\"term_id\": 63,
+	\"name\": \"LHWCA\",
+	\"slug\": \"lhwca\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 63,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 66,
+	\"name\": \"Tips\",
+	\"slug\": \"tips\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 66,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 8
+}, {
+	\"term_id\": 73,
+	\"name\": \"value\",
+	\"slug\": \"value\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 73,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 74,
+	\"name\": \"USCG\",
+	\"slug\": \"uscg\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 74,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 75,
+	\"name\": \"Damages\",
+	\"slug\": \"damages\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 75,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 7
+}, {
+	\"term_id\": 76,
+	\"name\": \"compensation\",
+	\"slug\": \"compensation\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 76,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 77,
+	\"name\": \"Filing a claim\",
+	\"slug\": \"filing-a-claim\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 77,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 78,
+	\"name\": \"Seaworthiness\",
+	\"slug\": \"seaworthiness\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 78,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 79,
+	\"name\": \"vessels\",
+	\"slug\": \"vessels\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 79,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 80,
+	\"name\": \"Mental health\",
+	\"slug\": \"mental-health\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 80,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 81,
+	\"name\": \"barge\",
+	\"slug\": \"barge\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 81,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 5
+}, {
+	\"term_id\": 82,
+	\"name\": \"hazards\",
+	\"slug\": \"hazards\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 82,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 83,
+	\"name\": \"Fatigue\",
+	\"slug\": \"fatigue\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 83,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 84,
+	\"name\": \"Back Injuries\",
+	\"slug\": \"back-injuries\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 84,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 85,
+	\"name\": \"ruptured disc\",
+	\"slug\": \"ruptured-disc\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 85,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 86,
+	\"name\": \"Benzene\",
+	\"slug\": \"benzene\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 86,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 87,
+	\"name\": \"OSHA\",
+	\"slug\": \"osha\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 87,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 88,
+	\"name\": \"MOU\",
+	\"slug\": \"mou\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 88,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 89,
+	\"name\": \"Drug Testing\",
+	\"slug\": \"drug-testing\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 89,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 90,
+	\"name\": \"No-fault\",
+	\"slug\": \"no-fault\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 90,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 91,
+	\"name\": \"cruise\",
+	\"slug\": \"cruise\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 91,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 92,
+	\"name\": \"Emotional distress\",
+	\"slug\": \"emotional-distress\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 92,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 93,
+	\"name\": \"Pain and Suffering\",
+	\"slug\": \"pain-and-suffering\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 93,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 94,
+	\"name\": \"Unlawful Termination\",
+	\"slug\": \"unlawful-termination\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 94,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 95,
+	\"name\": \"BP\",
+	\"slug\": \"bp\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 95,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 96,
+	\"name\": \"explosion\",
+	\"slug\": \"explosion\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 96,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 97,
+	\"name\": \"Depression\",
+	\"slug\": \"depression\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 97,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 98,
+	\"name\": \"Health\",
+	\"slug\": \"health\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 98,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 99,
+	\"name\": \"seaman\",
+	\"slug\": \"seaman\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 99,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 100,
+	\"name\": \"Benefits\",
+	\"slug\": \"benefits\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 100,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 101,
+	\"name\": \"Negligence\",
+	\"slug\": \"negligence\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 101,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 102,
+	\"name\": \"Longshore\",
+	\"slug\": \"longshore\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 102,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 103,
+	\"name\": \"Harbor\",
+	\"slug\": \"harbor\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 103,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 104,
+	\"name\": \"violations\",
+	\"slug\": \"violations\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 104,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 105,
+	\"name\": \"905(b)\",
+	\"slug\": \"905b\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 105,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 106,
+	\"name\": \"Fines\",
+	\"slug\": \"fines\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 106,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 107,
+	\"name\": \"Oil Company\",
+	\"slug\": \"oil-company\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 107,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 108,
+	\"name\": \"liability\",
+	\"slug\": \"liability\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 108,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 109,
+	\"name\": \"Third party\",
+	\"slug\": \"third-party\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 109,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 110,
+	\"name\": \"API\",
+	\"slug\": \"api\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 110,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 111,
+	\"name\": \"MMC\",
+	\"slug\": \"mmc\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 111,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 112,
+	\"name\": \"punitive\",
+	\"slug\": \"punitive\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 112,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 113,
+	\"name\": \"Accident prevention\",
+	\"slug\": \"accident-prevention\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 113,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 114,
+	\"name\": \"Slip and Fall\",
+	\"slug\": \"slip-and-fall\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 114,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 115,
+	\"name\": \"Offshore\",
+	\"slug\": \"offshore\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 115,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 116,
+	\"name\": \"shipyard\",
+	\"slug\": \"shipyard\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 116,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 117,
+	\"name\": \"Wages\",
+	\"slug\": \"wages\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 117,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 118,
+	\"name\": \"Hearing loss\",
+	\"slug\": \"hearing-loss\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 118,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 119,
+	\"name\": \"employer\",
+	\"slug\": \"employer\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 119,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 120,
+	\"name\": \"Advances\",
+	\"slug\": \"advances\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 120,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 121,
+	\"name\": \"Lost Wages\",
+	\"slug\": \"lost-wages\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 121,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 122,
+	\"name\": \"taxes\",
+	\"slug\": \"taxes\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 122,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 123,
+	\"name\": \"Settlement\",
+	\"slug\": \"settlement\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 123,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 124,
+	\"name\": \"Jones Act claim\",
+	\"slug\": \"jones-act-claim\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 124,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 125,
+	\"name\": \"spouse\",
+	\"slug\": \"spouse\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 125,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 126,
+	\"name\": \"Diver\",
+	\"slug\": \"diver\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 126,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 127,
+	\"name\": \"DOT\",
+	\"slug\": \"dot\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 127,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 128,
+	\"name\": \"Crane\",
+	\"slug\": \"crane\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 128,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 129,
+	\"name\": \"Death\",
+	\"slug\": \"death\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 129,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 130,
+	\"name\": \"tugboat\",
+	\"slug\": \"tugboat\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 130,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 3
+}, {
+	\"term_id\": 131,
+	\"name\": \"missing crew\",
+	\"slug\": \"missing-crew\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 131,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 132,
+	\"name\": \"UWA\",
+	\"slug\": \"uwa\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 132,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 133,
+	\"name\": \"Tankers\",
+	\"slug\": \"tankers\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 133,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 134,
+	\"name\": \"NOAA\",
+	\"slug\": \"noaa\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 134,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 135,
+	\"name\": \"Gulf of Mexico\",
+	\"slug\": \"gulf-of-mexico\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 135,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 136,
+	\"name\": \"platform\",
+	\"slug\": \"platform\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 136,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 137,
+	\"name\": \"lake accident\",
+	\"slug\": \"lake-accident\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 137,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 138,
+	\"name\": \"vessel\",
+	\"slug\": \"vessel\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 138,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 2
+}, {
+	\"term_id\": 139,
+	\"name\": \"tankerman\",
+	\"slug\": \"tankerman\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 139,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 140,
+	\"name\": \"ropes\",
+	\"slug\": \"ropes\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 140,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 141,
+	\"name\": \"shoulder injury\",
+	\"slug\": \"shoulder-injury\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 141,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 142,
+	\"name\": \"Louisiana\",
+	\"slug\": \"louisiana\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 142,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 143,
+	\"name\": \"oil\",
+	\"slug\": \"oil\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 143,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 144,
+	\"name\": \"gas\",
+	\"slug\": \"gas\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 144,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 145,
+	\"name\": \"IMO\",
+	\"slug\": \"imo\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 145,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 146,
+	\"name\": \"Oil Rigs\",
+	\"slug\": \"oil-rig\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 146,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 147,
+	\"name\": \"Transocean\",
+	\"slug\": \"transocean\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 147,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 149,
+	\"name\": \"settlements\",
+	\"slug\": \"settlements\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 149,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 150,
+	\"name\": \"attorney fees\",
+	\"slug\": \"attorney-fees\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 150,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}, {
+	\"term_id\": 151,
+	\"name\": \"claim process\",
+	\"slug\": \"claim-process\",
+	\"term_group\": 0,
+	\"term_taxonomy_id\": 151,
+	\"taxonomy\": \"category\",
+	\"description\": \"\",
+	\"parent\": 0,
+	\"count\": 1
+}]";
+
+
+$tags_to_import = json_decode($json_string,true);
+
+$insert_tag = $pdo->prepare("INSERT INTO wp_terms (name,slug) VALUES (:name,:slug)");
+$insert_tax_record = $pdo->prepare("INSERT INTO wp_term_taxonomy (term_id, taxonomy) VALUES (:term_id, :taxonomy)");
+
+foreach($tags_to_import as $tag)
+{
+    $term_id = $tag['term_id'];
+    if($term_id != 1)
+    {
+        $result_a = $insert_tag->execute([
+            'name' => $tag['name'],
+            'slug' => $tag['slug']
+        ]);
+        if($result_a){
+            $result_b = $insert_tax_record->execute([
+                'term_id' => $pdo->lastInsertId(),
+                'taxonomy' => 'post_tag'
+            ]);
+            if(!$result_b){
+                echo "Could not insert TAG: " . $tag['name'] . "<br />";
+            }
+        }else{
+            echo "Could not insert TAG: " . $tag['name'] . "<br />";
+        }
+    }
+}

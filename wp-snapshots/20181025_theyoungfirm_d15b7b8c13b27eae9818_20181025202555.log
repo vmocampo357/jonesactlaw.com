@@ -1,0 +1,80 @@
+********************************************************************************
+DUPLICATOR-LITE PACKAGE-LOG: October 25, 2018 8:26 pm
+NOTICE: Do NOT post to public sites or forums 
+********************************************************************************
+VERSION:	1.2.52
+WORDPRESS:	4.9.8
+PHP INFO:	5.6.38 | SAPI: fpm-fcgi
+SERVER:		Apache 
+PHP TIME LIMIT: (0) no time limit imposed 
+PHP MAX MEMORY: 2048M (2048M default) 
+MEMORY STACK: 45.25MB 
+
+********************************************************************************
+DATABASE:
+********************************************************************************
+BUILD MODE:   MYSQLDUMP
+MYSQLTIMEOUT: 5000
+MYSQLDUMP:    Is Supported 
+FILTERED: [] 
+RESPONSE: Ran from /usr/bin/mysqldump 
+TABLES: total:37 | filtered:0 | create:37 
+SQL CREATED: 20181025_theyoungfirm_d15b7b8c13b27eae9818_20181025202555_database.sql 
+SQL FILE SIZE: 29.31MB (30737868) 
+SQL FILE TIME: 2018-10-25 20:26:03 
+SQL RUNTIME: 0.78 sec. 
+
+******************************************************************************** 
+ARCHIVE (ZIP): 
+******************************************************************************** 
+ARCHIVE DIR:  /var/www/new.jonesactlaw.com/public_html 
+ARCHIVE FILE: 20181025_theyoungfirm_d15b7b8c13b27eae9818_20181025202555_archive.zip 
+FILTERS: *OFF* 
+DIRS:
+	not set 
+FILES:
+	not set 
+EXTS:  not set 
+---------------------------------------- 
+COMPRESSING 
+SIZE:	0B 
+STATS:	Dirs 0 | Files 0 
+SQL ADDED: 20181025_theyoungfirm_d15b7b8c13b27eae9818_20181025202555_database.sql 
+ZipArchive Object
+(
+    [status] => 0
+    [statusSys] => 0
+    [numFiles] => 1
+    [filename] => /var/www/new.jonesactlaw.com/public_html/wp-snapshots/tmp/20181025_theyoungfirm_d15b7b8c13b27eae9818_20181025202555_archive.zip
+    [comment] => 
+)
+ 
+COMPRESSION RESULT: '1' 
+COMPRESSED SIZE: 4.03MB 
+ARCHIVE RUNTIME: 1.64 sec. 
+MEMORY STACK: 45.25MB 
+
+******************************************************************************** 
+MAKE INSTALLER: 
+******************************************************************************** 
+Build Start 
+Build Finished 
+Preparing for use 
+PACK SIZE:  
+Template parsed with new data 
+Complete [/var/www/new.jonesactlaw.com/public_html/wp-snapshots/tmp/20181025_theyoungfirm_d15b7b8c13b27eae9818_20181025202555_installer.php] 
+Added to archive 
+
+******************************************************************************** 
+INTEGRITY CHECKS: 
+******************************************************************************** 
+SQL File: 29.31MB 
+Installer File: 514.18KB 
+Archive File: 4.03MB  
+
+********************************************************************************
+RECORD ID:[2]
+TOTAL PROCESS RUNTIME: 2.51 sec.
+PEAK PHP MEMORY USED: 49MB
+DONE PROCESSING => 20181025_theyoungfirm October 25, 2018 8:26 pm
+ 

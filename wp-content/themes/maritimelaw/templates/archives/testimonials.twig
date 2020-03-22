@@ -1,0 +1,32 @@
+{% extends "base-page.twig" %}
+
+{% block page_title %}
+    What Our Clients Say About Us
+{% endblock %}
+
+{% block page_featured_image %}
+    <img src="{{ img_dir }}/testimonial-library.jpg" />
+{% endblock %}
+
+{% block page_summary %}
+    <span id="jal-any-element-summary">One of the best ways to judge a law firm is by the clients it has helped. Meet some of our clients and let them tell you why they came to us, how we handled their claims, and the results they received.</span>
+{% endblock %}
+
+{% block page_body %}
+    <div id="jal-any-element-primary" class="col-xs-12 jal-any-element-body">
+        <p>**Disclaimer: The following results should not be construed as a prediction or guarantee of the results we will achieve in your case. Each case is unique, and results will therefore differ from case to case.**Note: The following testimonials were NOT in any way scripted or pre-written. These are real stories from real clients who were happy to share their experience with our firm.</p>
+        <?php include('components/testimonial-video-list.php'); ?>
+        <h2>Will You be as Satisfied as Our Clients Have Been?</h2>
+        {{ post.content }}
+        <hr />
+        <div class="">
+            <div>
+                <ul class="jal-any-card-list">
+                    {% import 'loops/testimonial-post-loop.twig' as looper %}
+                    {{ looper.testimonial_post_loop(posts) }}
+                    <div data-current-page="1" data-post-type="{{ posts[0].type.slug }}" id="infinite-loop"></div>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
