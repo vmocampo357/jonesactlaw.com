@@ -2260,8 +2260,8 @@ blockquote
 #nbb-fb-right{ float:right; }
 #nbb-footer-banner ul{ padding-left:20px; }
 #nbb-footer-banner ul li{ margin:0px; padding:0px;display:inline-block; }
-#nbb-footer-banner ul li a{ display:block;padding:10px 15px;transition:all 0.1s;color:white;text-decoration:none;font-size:16px; }
-#nbb-footer-banner ul li a:hover, #nbb-footer-banner ul li a.active{ background-color:#b50f1e;color:white; }
+#nbb-footer-banner ul li a{ display:block;padding:10px 15px;transition:all 0.1s;color:white;text-decoration:none;font-size:16px;cursor:pointer; }
+#nbb-footer-banner ul li a:hover, #nbb-footer-banner ul li a.active{ background-color:#b50f1e;color:white;cursor:pointer !important; }
 #nbb-fb-quiet ul{ padding-left:0px !important; }
 #nbb-fb-quiet ul li{}
 #nbb-fb-quiet ul li a{ padding:10px 4px; }
