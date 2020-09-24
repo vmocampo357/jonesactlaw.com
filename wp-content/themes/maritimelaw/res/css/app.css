@@ -1409,12 +1409,12 @@ ul.jal-ul-mega-menu-top li.first-level ul li a
    Responsive Video Stuff
    ========================================================================== */
 
-.jal-responsive-video, .rll-youtube-player
+/*.jal-responsive-video, .rll-youtube-player
 {
     position: relative;
-    /*padding-bottom: 56.25%; !* 16:9 *!
+    !*padding-bottom: 56.25%; !* 16:9 *!
     padding-top: 25px;
-    height: 0;*/
+    height: 0;*!
     min-width:380px;
     width:480px;
     height:270px;
@@ -1461,9 +1461,9 @@ ul.jal-ul-mega-menu-top li.first-level ul li a
     transform: translateX(-50%) translateY(-50%);
     top:50%;
     left:50%;
-    /*background-color:red;*/
+    !*background-color:red;*!
     font:normal normal normal 14px/1 FontAwesome;
-}
+}*/
 /*.rll-youtube-player img{
     width: 100% !important;
     height: 100% !important;
@@ -2701,10 +2701,10 @@ blockquote
 
 @media screen and (max-width: 480px)
 {
-    .jal-responsive-video, .rll-youtube-player
+    /*.jal-responsive-video, .rll-youtube-player
     {
         position: relative;
-        padding-bottom: 56.25%; /* 16:9 */
+        padding-bottom: 56.25%; !* 16:9 *!
         padding-top: 25px;
         height: 0;
         min-width: inherit !important;
@@ -2719,7 +2719,7 @@ blockquote
         top:50%;
         left:50%;
         transform: translateX(-50%) translateY(-50%);
-    }
+    }*/
 }
 
 /* ==========================================================================
