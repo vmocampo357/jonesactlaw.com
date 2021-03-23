@@ -555,7 +555,7 @@ $(document).ready(function(){
      * Check the page for any videos we might have
      * @type {*|jQuery|HTMLElement}
      */
-    var $allVideos = $("iframe[src^='https://player.vimeo.com'],iframe[src^='http://player.vimeo.com'],iframe[src^='https://www.youtube.com'],iframe[src^='http://www.youtube.com'],iframe[src^='//www.youtube.com']");
+    var $allVideos = $("iframe[src^='https://www.youtube.com'],iframe[src^='http://www.youtube.com'],iframe[src^='//www.youtube.com']");
 
     if($allVideos.length > 0)
     {
@@ -566,7 +566,8 @@ $(document).ready(function(){
                 var vidElContent = $allVideos.get(vid);
                 var vidElement = $(vidElContent);
                 if (!vidElement.hasClass("lazyloading")) {
-                    var replace = "<div class=\"jal-responsive-video\">" + vidElContent.outerHTML + "</div>";
+                    // var replace = "<div class=\"jal-responsive-video\">" + vidElContent.outerHTML + "</div>";
+                    var replace = "<div><img src='/wp-content/themes/maritimelaw/img/placeyoutuber.jpg' /></div>";
                     vidElement.replaceWith( replace );
                     console.log("Video found, replaced for responsiveness.");
                     console.log(vidElContent);
@@ -1621,7 +1622,7 @@ JalChatPopup.prototype = {
                 '</style>'+
                 '<div id="blackClosesThis" style="width:100%; height:100%; background-color:rgba(0,0,0,0.8); position: fixed; top:0px; left:0px; z-index:999999;">'+
                 '<div id="theMainChatContainer" style="background-color:white; width:55%; padding:30px; min-width:250px; max-width:640px; position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">'+
-                '<img id="timChatPic" src="/Tim-profilepic-300x600.webp" />'+
+                '<img id="timChatPic" loading="lazy" src="/Tim-profilepic-300x600.webp" />'+
                 '<div id="jalChatClosePopup" style="">X</div>'+
                 '<div id="jalChatDivParent" class="container-fluid">' +
                 '<div class="row">' +

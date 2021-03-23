@@ -86,7 +86,8 @@
                                 <div class="jal-div-video-single-content">
                                     <span>{{ video.title }} <br /> {{ video.excerpt }}</span>
                                 </div>
-                                <div style="background-image:url('https://img.youtube.com/vi/{{ video.get_field('vv_video_url')|youtube_id }}/0.jpg');" class="jal-div-video-single-thumb"></div>
+                                {#<div style="background-image:url('https://img.youtube.com/vi/{{ video.get_field('vv_video_url')|youtube_id }}/0.jpg');" class="jal-div-video-single-thumb"></div>#}
+                                <div style="background-image:url('/wp-content/themes/maritimelaw/img/placeyoutuber.jpg');" class="jal-div-video-single-thumb"></div>
                             </a>
                         </li>
                         {% endfor %}

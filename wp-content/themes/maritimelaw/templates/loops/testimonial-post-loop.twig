@@ -13,6 +13,7 @@
                 <p>{{ testimonial.get_field('page_summary')|default(testimonial.preview) }}</p>
                 <span><strong>{{ testimonial.get_field('tst_client_name')|default(testimonial.title|truncate(2)) }}</strong> | {{ testimonial.get_field('tst_client_location')|default('USA') }} | {{ testimonial.get_field('tst_client_settlement_info')|default('Testimonial') }}</span>
                 <a href="{{ testimonial.link }}"><div><i class="fa fa-plus"></i></div> Read More</a>
+                {#<a href="{{ testimonial.link }}">Read More</a>#}
             </div>
         </li>
     {% endfor %}

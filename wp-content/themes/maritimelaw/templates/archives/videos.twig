@@ -33,7 +33,8 @@
                                 <ul class="jal-ul-video-slick">
                                 {% for video in posts[t.slug] %}
                                     <li class="jal-div-video-slick-item">
-                                        <a href="{{ video.link }}" style="background-image:url('https://img.youtube.com/vi/{{ video.get_field('vv_video_url')|youtube_id }}/0.jpg');" class="jal-div-video-single-thumb"></a>
+                                        <a href="{{ video.link }}" style="background-image:url('/wp-content/themes/maritimelaw/img/placeyoutuber.jpg');" class="jal-div-video-single-thumb"></a>
+                                        {#<a href="{{ video.link }}" style="background-image:url('https://img.youtube.com/vi/{{ video.get_field('vv_video_url')|youtube_id }}/0.jpg');" class="jal-div-video-single-thumb"></a>#}
                                         <div class="jal-div-video-single-content">
                                             <span>{{ video.title }} <br /> {{ video.excerpt }}</span>
                                         </div>

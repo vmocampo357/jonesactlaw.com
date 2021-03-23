@@ -4,6 +4,18 @@
 
     <div class="container">
 
+    {% if needs_password %}
+        <!-- CONTENT, OPENING !-->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="jal-any-element-body">
+                    <div class="force-780" style="height:300px;margin-top:200px;">
+                        {{ password_form }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}{# IF NO NEEDS PASSWORD#}
         <!-- OPTIONAL BANNER !-->
         {% if post.thumbnail.src or is_archive %}
             <div class="row">
@@ -60,7 +72,6 @@
             </div>
             {% endblock %}
         </div>
-
-    </div>
-
+    {% endif %}{# THE END OF PASSWORD FORM#}
+</div>
 {% endblock %}
